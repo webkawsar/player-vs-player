@@ -9,6 +9,16 @@ const p2ScoreElement = document.querySelector('#p2Score');
 const form = document.querySelector('form');
 
 
+// data layer
+let p1Score = 0;
+let p2Score = 0;
+let winningScore = 5
+let gameOver = false;
+
+
+// update winning to score into dom
+playingTotElement.textContent = winningScore;
+
 // single responsibility principle
 // input and update playing to score
 form.addEventListener('submit', (e) => {
@@ -23,6 +33,9 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
+    // saving it into data layer
+    winningScore = +inputScore;
+
     // showing the value on DOM
     playingTotElement.textContent = +inputScore;
 
@@ -33,7 +46,36 @@ form.addEventListener('submit', (e) => {
 
 
 
+p1BtnElement.addEventListener('click', () => {
+    // increase the count 
+    if(p1Score < winningScore) {
+        p1Score++;
 
+        // update on dom
+        p1ScoreElement.textContent= p1Score;
+    }
+
+    if(p1Score === winningScore) {
+        gameOver = true;
+    }
+
+    
+})
+
+
+p2BtnElement.addEventListener('click', () => {
+    // increase the count 
+    if(p2Score < winningScore) {
+        p2Score++;
+        
+        // update on dom
+        p2ScoreElement.textContent= p2Score;
+    }
+
+    if(p2Score === winningScore) {
+        gameOver = true;
+    }
+})
 
 
 

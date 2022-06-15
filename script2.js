@@ -25,10 +25,56 @@ playingTotElement.textContent = winningScore;
 playerTurn === 'p1' ? p2BtnElement.setAttribute('disabled', 'disabled') : p1BtnElement.setAttribute('disabled', 'disabled')
 
 
+const handleWinningState = () => {
+
+    if(p1Score === winningScore || p2Score === winningScore) {
+        gameOver = true;
+
+        // disabled player button
+        p1BtnElement.setAttribute('disabled', 'disabled');
+        p2BtnElement.setAttribute('disabled', 'disabled');
+    }
+
+
+    if(p1Score === winningScore) {
+        // show winner message
+        alert('Player 1 is winner');
+
+    } else if(p2Score === winningScore) {
+        // show winner message
+        alert('Player 2 is winner');
+
+    }
+    
+}
+
+const resetValues = () => {
+    p1Score = 0;
+    p2Score = 0;
+    winningScore = 5
+    gameOver = false;
+    players = ['p1', 'p2'];
+    playerTurn = players[Math.round(Math.random())];
+
+    
+    p1BtnElement.removeAttribute('disabled');
+    p2BtnElement.removeAttribute('disabled');
+
+    p1ScoreElement.textContent = p1Score;
+    p2ScoreElement.textContent = p2Score;
+
+    // update winning to score into dom
+    playingTotElement.textContent = winningScore;
+    
+}
+
 // single responsibility principle
 // input and update playing to score
 form.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    //reset previous state
+    resetValues();
 
     // getting this input value
     const inputScore = inputElement.value;
@@ -69,18 +115,7 @@ p1BtnElement.addEventListener('click', () => {
         p2BtnElement.removeAttribute('disabled');
     }
 
-    if(p1Score === winningScore) {
-        gameOver = true;
-
-        // disabled player button
-        p1BtnElement.setAttribute('disabled', 'disabled');
-        p2BtnElement.setAttribute('disabled', 'disabled');
-
-        // show winner message
-        alert('Player 1 is winner');
-    }
-
-    
+    handleWinningState();
 })
 
 
@@ -101,40 +136,14 @@ p2BtnElement.addEventListener('click', () => {
         p1BtnElement.removeAttribute('disabled');
     }
 
-    if(p2Score === winningScore) {
-        gameOver = true;
-
-        // disabled player button
-        p1BtnElement.setAttribute('disabled', 'disabled');
-        p2BtnElement.setAttribute('disabled', 'disabled');
-
-        // show winner message
-        alert('Player 2 is winner');
-    }
+    handleWinningState();
 })
 
 
 // reset button event listener
 resetBtnElement.addEventListener('click', () => {
-    p1Score = 0;
-    p2Score = 0;
-    winningScore = 5
-    gameOver = false;
-    players = ['p1', 'p2'];
-    playerTurn = players[Math.round(Math.random())];
-
+    resetValues();
     
-    p1BtnElement.removeAttribute('disabled');
-    p2BtnElement.removeAttribute('disabled');
-
-    p1ScoreElement.textContent = p1Score;
-    p2ScoreElement.textContent = p2Score;
-
-    // update winning to score into dom
-    playingTotElement.textContent = winningScore;
-    // disabled button based on player turn
-    // playerTurn === 'p1' ? p2BtnElement.setAttribute('disabled', 'disabled') : p1BtnElement.setAttribute('disabled', 'disabled')
-
 })
 
 

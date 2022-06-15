@@ -48,7 +48,7 @@ form.addEventListener('submit', (e) => {
 
 p1BtnElement.addEventListener('click', () => {
     // increase the count 
-    if(p1Score < winningScore) {
+    if(!gameOver && p1Score < winningScore) {
         p1Score++;
 
         // update on dom
@@ -57,6 +57,13 @@ p1BtnElement.addEventListener('click', () => {
 
     if(p1Score === winningScore) {
         gameOver = true;
+
+        // disabled player button
+        p1BtnElement.setAttribute('disabled', 'disabled');
+        p2BtnElement.setAttribute('disabled', 'disabled');
+
+        // show winner message
+        alert('Player 1 is winner');
     }
 
     
@@ -65,7 +72,7 @@ p1BtnElement.addEventListener('click', () => {
 
 p2BtnElement.addEventListener('click', () => {
     // increase the count 
-    if(p2Score < winningScore) {
+    if(!gameOver && p2Score < winningScore) {
         p2Score++;
         
         // update on dom
@@ -74,6 +81,13 @@ p2BtnElement.addEventListener('click', () => {
 
     if(p2Score === winningScore) {
         gameOver = true;
+
+        // disabled player button
+        p1BtnElement.setAttribute('disabled', 'disabled');
+        p2BtnElement.setAttribute('disabled', 'disabled');
+
+        // show winner message
+        alert('Player 2 is winner');
     }
 })
 
